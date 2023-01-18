@@ -1,8 +1,9 @@
 const express = require("express");
 require("dotenv").config();
 const sequelize = require("./database/db");
-const router = require("./routes/index");
 const cors = require("cors");
+const router = require("./routes/index");
+const models = require("./models/index");
 
 const app = express();
 app.use(cors());
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
 const startApplication = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     app.listen(PORT, () => {
       console.log(`Server ran on port ${PORT}`);
     });
