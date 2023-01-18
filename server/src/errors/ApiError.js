@@ -1,12 +1,12 @@
 class ApiError extends Error {
-  constructor(status, errors) {
+  constructor(status, message) {
     super();
     this.status = status;
-    this.errors = errors;
+    this.message = message;
   }
 
-  static badRequest(errors) {
-    throw new ApiError(400, errors);
+  static badRequest(message) {
+    throw new ApiError(400, message);
   }
 
   static unauthorized() {

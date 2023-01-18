@@ -1,8 +1,10 @@
-const { signUpSchema, signInSchema } = require("../validation/index");
-const { UserModel } = require("../models/index");
-const ApiError = require("../errors/ApiError");
-const { AuthRepository } = require("../repositories/index");
 const bcrypt = require("bcrypt");
+
+const { UserModel } = require("../models/index");
+const { AuthRepository } = require("../repositories/index");
+
+const { signUpSchema, signInSchema } = require("../validation/index");
+const ApiError = require("../errors/ApiError");
 class AuthController {
   async signIn(req, res) {
     try {
@@ -32,32 +34,34 @@ class AuthController {
         email: user.email,
       });
 
-      return res.json({ status: 200, data: jwtToken });
+      return res.status(200).json({ data: jwtToken });
     } catch (error) {
-      return res.status(400).json({ status: 400, error: error.errors });
+      return res.status(400).json({ error: error.message });
     }
   }
   async signUp(req, res) {
     try {
       const { body } = req;
+      const data = signUpSchema.validateSync(body, { abortEarly: false });
+
       const candidate = await UserModel.findOne({
         where: { email: body.email },
       });
-      const data = signUpSchema.validateSync(body, { abortEarly: false });
       if (candidate) {
         ApiError.badRequest("User already has been created");
       }
 
       const newUser = await AuthRepository.createUser(data);
       res.status(200).json({
-        status: 200,
         title: "You've successfully created account",
         data: newUser,
       });
     } catch (error) {
-      return res
-        .status(400)
-        .json({ status: error.status || 400, error: error.errors });
+      if (error.errors) {
+        return res.status(400).json({ error: error.errors });
+      }
+
+      return res.status(400).json({ error: error.message });
     }
   }
 }

@@ -1,6 +1,7 @@
-const { UserModel } = require("../models/index");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+const { UserModel } = require("../models/index");
 class AuthRepository {
   async createUser({ email, name, password }) {
     const hashPassword = await bcrypt.hash(password, 4);

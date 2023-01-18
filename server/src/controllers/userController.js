@@ -1,5 +1,5 @@
-const checkJwt = require("../helpers/checkJwt");
 const { UserRepository } = require("../repositories/index");
+const checkJwt = require("../helpers/checkJwt");
 class UserController {
   async getUsers(req, res) {
     try {
@@ -9,7 +9,7 @@ class UserController {
 
       res.json({ usersList });
     } catch (error) {
-      res.status(error.status).json({ message: error.errors });
+      res.status(error.status).json({ error: error.message });
     }
   }
 
@@ -24,7 +24,7 @@ class UserController {
 
       res.json({ updatedUserList });
     } catch (error) {
-      res.status(error.status).json({ message: error.errors });
+      res.status(error.status).json({ error: error.message });
     }
   }
 
@@ -36,7 +36,7 @@ class UserController {
 
       res.json({ updatedUserList });
     } catch (error) {
-      res.status(error.status).json({ message: error.errors });
+      res.status(error.status).json({ error: error.message });
     }
   }
 }

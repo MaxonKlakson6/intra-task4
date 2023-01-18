@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const { authController } = require("../controllers/index");
 
 const authRouter = new Router();
