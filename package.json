@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "server": "node server/index.js",
+    "server": "node server/src/index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "build": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "repository": "git@github.com:MaxonKlakson6/intra-task4.git",
   "author": "Maxim <mihalenko.maxim21@gmail.com>",
