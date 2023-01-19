@@ -1,37 +1,37 @@
 import SnackBar from "src/components/SnackBar";
-import SignInForm from "src/pages/SignIn/components/SignInForm";
+import SignUpForm from "src/pages/SignUp/components/SignUpForm";
 
 import { useAppDispatch } from "src/hooks/reduxHooks";
-import { cleanUp } from "src/pages/SignIn/reducer";
-
+import { cleanUp } from "src/pages/SignUp/reducer";
+import type { AuthFormValues } from "src/types/AuthForm";
 import type { AuthProps } from "src/types/AuthProps";
-import type { FormValues } from "src/pages/SignIn/types";
 
 import stylesClasses from "src/static/styles/authClasses.module.scss";
 
-interface SignInLayoutProps extends AuthProps<FormValues> {
-  isAuth: boolean;
+interface SignUpLayoutProps extends AuthProps<AuthFormValues> {
+  successData: string;
 }
-const SignInLayout = ({
+const SignUpLayout = ({
   form,
-  error,
-  isAuth,
   isLoading,
+  error,
+  successData,
   handleChangeForm,
   handleSubmit,
-}: SignInLayoutProps): JSX.Element => {
+}: SignUpLayoutProps): JSX.Element => {
   const dispatch = useAppDispatch();
+
   const handleAlertClose = () => {
     dispatch(cleanUp());
   };
 
   return (
     <div className={stylesClasses.wrapper}>
-      <SignInForm
+      <SignUpForm
         form={form}
+        isLoading={isLoading}
         handleChangeForm={handleChangeForm}
         handleSubmit={handleSubmit}
-        isLoading={isLoading}
       />
       {error && (
         <SnackBar
@@ -42,16 +42,17 @@ const SignInLayout = ({
           onClose={handleAlertClose}
         />
       )}
-      {isAuth && (
+      {successData && (
         <SnackBar
-          message="Welcome, we redirect you to home page in 2 seconds"
+          message={successData}
           severity="success"
           duration={2000}
           position={{ vertical: "top", horizontal: "center" }}
+          onClose={handleAlertClose}
         />
       )}
     </div>
   );
 };
 
-export default SignInLayout;
+export default SignUpLayout;

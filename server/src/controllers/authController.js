@@ -41,6 +41,10 @@ class AuthController {
 
       return res.status(200).json({ data: jwtToken });
     } catch (error) {
+      if (error.errors) {
+        return res.status(400).json({ error: error.errors });
+      }
+
       return res.status(400).json({ error: error.message });
     }
   }
@@ -59,8 +63,7 @@ class AuthController {
 
       const newUser = await AuthRepository.createUser(data);
       res.status(200).json({
-        title: "You've successfully created account",
-        data: newUser,
+        data: "You've successfully created account",
       });
     } catch (error) {
       if (error.errors) {

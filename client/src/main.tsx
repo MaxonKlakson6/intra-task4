@@ -8,7 +8,6 @@ import "src/index.css";
 import { HashRouter } from "react-router-dom";
 import Router from "src/router";
 
-// https://users-manager.onrender.com
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <HashRouter>
     <Provider store={store}>
