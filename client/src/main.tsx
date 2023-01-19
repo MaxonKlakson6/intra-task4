@@ -1,10 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+import { store } from "src/store";
+
+import "src/index.css";
+import { HashRouter } from "react-router-dom";
+import Router from "src/router";
+
+// https://users-manager.onrender.com
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <HashRouter>
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  </HashRouter>
+);
