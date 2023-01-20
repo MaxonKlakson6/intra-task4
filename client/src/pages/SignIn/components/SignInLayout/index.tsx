@@ -6,6 +6,7 @@ import { cleanUp } from "src/pages/SignIn/reducer";
 
 import type { AuthProps } from "src/types/AuthProps";
 import type { FormValues } from "src/pages/SignIn/types";
+import { MESSAGES } from "src/constants/alertMessages";
 
 import stylesClasses from "src/static/styles/authClasses.module.scss";
 
@@ -44,7 +45,7 @@ const SignInLayout = ({
       )}
       {isAuth && (
         <SnackBar
-          message="Welcome, we redirect you to home page in 2 seconds"
+          message={MESSAGES.WELCOME}
           severity="success"
           duration={2000}
           position={{ vertical: "top", horizontal: "center" }}

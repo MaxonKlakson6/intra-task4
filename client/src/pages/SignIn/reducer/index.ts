@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { authorization } from "src/pages/SignIn/thunks/authorization";
-import { StringAuthError } from "src/types/AuthError";
+import { ApiError } from "src/types/AuthError";
 
 interface SignInInitialState {
-  error: StringAuthError;
+  error: ApiError;
   isLoading: boolean;
   isAuth: boolean;
 }
@@ -16,7 +16,7 @@ const initialState: SignInInitialState = {
 };
 
 const signInSlice = createSlice({
-  name: "sign-in",
+  name: "signIn",
   initialState,
   reducers: {
     cleanUp: (state) => {

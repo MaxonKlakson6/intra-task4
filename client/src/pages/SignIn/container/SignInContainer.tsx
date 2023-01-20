@@ -30,9 +30,9 @@ const SignInContainer = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(1);
+
     if (token) {
-      navigate(ROUTE_NAMES.MAIN_PAGE);
+      navigate(ROUTE_NAMES.USER_TABLE);
     }
   }, []);
 
@@ -40,7 +40,7 @@ const SignInContainer = () => {
     let timeout: number | undefined;
     if (isAuth) {
       timeout = setTimeout(() => {
-        navigate(ROUTE_NAMES.MAIN_PAGE);
+        navigate(ROUTE_NAMES.USER_TABLE);
       }, 2000);
     }
     return () => {

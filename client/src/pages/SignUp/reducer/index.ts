@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { registration } from "src/pages/SignUp/thunks/registration";
-import type { StringAuthError } from "src/types/AuthError";
+import type { ApiError } from "src/types/AuthError";
 
 interface SignUpInitialState {
   isLoading: boolean;
-  error: StringAuthError;
+  error: ApiError;
   data: string;
 }
 

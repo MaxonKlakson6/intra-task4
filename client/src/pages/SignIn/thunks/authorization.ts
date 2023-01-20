@@ -15,7 +15,6 @@ export const authorization = createAsyncThunk<
 
     return response.data;
   } catch (error) {
-    console.log(error);
     const axiosError = error as AxiosError<AuthError>;
     return rejectWithValue(axiosError.response?.data);
   }
